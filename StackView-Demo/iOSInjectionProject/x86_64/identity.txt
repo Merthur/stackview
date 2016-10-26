@@ -1,0 +1,2 @@
+/Users/zhangyc/Library/Developer/Xcode/DerivedData/StackView-Demo-gdpandunhearpacsuhjcjoprpmwy/Build/Products/Debug-iphonesimulator/StackView-Demo.app
+
