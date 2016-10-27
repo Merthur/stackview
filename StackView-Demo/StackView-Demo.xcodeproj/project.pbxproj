@@ -27,6 +27,7 @@
 		70AE98591D3230410022E0ED /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AE984F1D3230410022E0ED /* ViewController+MASAdditions.m */; };
 		70AE987F1D323D840022E0ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AE987E1D323D840022E0ED /* ViewController.m */; };
 		70AE98821D323F0C0022E0ED /* DemoOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70AE98811D323F0C0022E0ED /* DemoOneController.m */; };
+		AF69F5CD1DC1A53300213A1C /* CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AF69F5CC1DC1A53300213A1C /* CustomLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		70AE987E1D323D840022E0ED /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		70AE98801D323F0C0022E0ED /* DemoOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoOneController.h; sourceTree = "<group>"; };
 		70AE98811D323F0C0022E0ED /* DemoOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoOneController.m; sourceTree = "<group>"; };
+		AF69F5CB1DC1A53300213A1C /* CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLabel.h; sourceTree = "<group>"; };
+		AF69F5CC1DC1A53300213A1C /* CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				70AE98071D322F330022E0ED /* AppDelegate.m */,
 				70AE987D1D323D840022E0ED /* ViewController.h */,
 				70AE987E1D323D840022E0ED /* ViewController.m */,
+				AF69F5CB1DC1A53300213A1C /* CustomLabel.h */,
+				AF69F5CC1DC1A53300213A1C /* CustomLabel.m */,
 				70AE98801D323F0C0022E0ED /* DemoOneController.h */,
 				70AE98811D323F0C0022E0ED /* DemoOneController.m */,
 				70AE98091D322F330022E0ED /* DemoTwoController.h */,
@@ -351,6 +356,7 @@
 				70AE987F1D323D840022E0ED /* ViewController.m in Sources */,
 				70AE98571D3230410022E0ED /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				70AE98551D3230410022E0ED /* MASViewConstraint.m in Sources */,
+				AF69F5CD1DC1A53300213A1C /* CustomLabel.m in Sources */,
 				70AE98501D3230410022E0ED /* MASCompositeConstraint.m in Sources */,
 				70AE98561D3230410022E0ED /* NSArray+MASAdditions.m in Sources */,
 				70AE980B1D322F330022E0ED /* DemoTwoController.m in Sources */,

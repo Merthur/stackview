@@ -8,6 +8,7 @@
 
 #import "DemoOneController.h"
 #import "Masonry.h"
+#import "CustomLabel.h"
 
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -38,9 +39,15 @@ static const CGFloat labelWidth = 5;
     self.containerView.backgroundColor = [UIColor orangeColor];
     self.containerView.layer.borderColor = [UIColor redColor].CGColor;
     self.containerView.layer.borderWidth = 10;
-    
+
+    /** UILayoutConstraintAxis
+     UILayoutConstraintAxisHorizontal
+     UILayoutConstraintAxisVertical
+     */
     self.containerView.axis = UILayoutConstraintAxisHorizontal;
-    
+
+    self.containerView.spacing = 0;
+
     /**  UIStackViewDistribution
      UIStackViewDistributionFill,
      UIStackViewDistributionFillEqually,
@@ -60,10 +67,7 @@ static const CGFloat labelWidth = 5;
      UIStackViewAlignmentBottom = UIStackViewAlignmentTrailing,
      UIStackViewAlignmentLastBaseline,
      */
-    
-    self.containerView.alignment = UIStackViewAlignmentFill;
-    
-    self.containerView.spacing = 10;
+    self.containerView.alignment = UIStackViewAlignmentCenter;
 
     [self.view addSubview:self.containerView];
     
@@ -101,44 +105,49 @@ static const CGFloat labelWidth = 5;
 
 - (void)addClick:(id)sender
 {
-    NSLog(@"Before Add : %zd",self.containerView.subviews.count);
-    
-    UILabel *view = [[UILabel alloc] initWithFrame:CGRectZero];
+    NSLog(@"Before Add arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
+
+    CustomLabel *view = [[CustomLabel alloc] initWithFrame:CGRectZero];
 //    view.numberOfLines = 0;
-    int count = (int)(5 - self.containerView.subviews.count);
-    [view setContentHuggingPriority:abs(count * 10)
-                            forAxis:UILayoutConstraintAxisHorizontal];
     view.textAlignment = NSTextAlignmentCenter;
-    NSMutableString *str = [@"test" mutableCopy];
-//    for (int i=0; i<self.containerView.subviews.count*2; i++) {
-//        [str appendString:@"test"];
-//    }
-    view.text = str;
+    view.text = @"test";
+
+//    int count = (int)(3 - self.containerView.subviews.count);
+//    [view setContentHuggingPriority:abs(count)
+//                            forAxis:self.containerView.axis];
+
+//    view.customIntrinsicContentSize = CGSizeMake(100, 30);
+//    [view setContentCompressionResistancePriority:abs(count)
+//                                          forAxis:self.containerView.axis];
+    NSLog(@"%f %f", [view contentCompressionResistancePriorityForAxis:self.containerView.axis],
+          [view contentHuggingPriorityForAxis:self.containerView.axis]);
 
 //    CGRect frame = view.frame;
-//    frame.size = CGSizeMake(500 * self.containerView.subviews.count, 500);
+//    frame.size = CGSizeMake((self.containerView.subviews.count+1) * 5, 30);
 //    view.frame = frame;
     view.backgroundColor = [UIColor colorWithRed:random()%256/255.0 green:random()%256/255.0 blue:random()%256/255.0 alpha:1];
+
     [self.containerView addArrangedSubview:view];
+//    [self.containerView addSubview:view];
 
     [UIView animateWithDuration:1.0 animations:^{
         [self.containerView layoutIfNeeded];
     }];
 
-    NSLog(@"After Add : %zd",self.containerView.subviews.count);
+    NSLog(@"After Add arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
 }
 
 - (void)removeClick:(id)sender
 {
-    NSLog(@"Before Remove : %zd", self.containerView.subviews.count);
+    NSLog(@"Before Remove arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
     
-    UIView *view = [self.containerView subviews].lastObject;
+    UIView *view = self.containerView.arrangedSubviews.lastObject;
     [self.containerView removeArrangedSubview:view];
-    [view removeFromSuperview];
+//    [view removeFromSuperview];
     [UIView animateWithDuration:0.25 animations:^{
         [self.containerView layoutIfNeeded];
     }];
-    NSLog(@"After Remove : %zd",self.containerView.subviews.count);
+    NSLog(@"After Remove arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
 }
 
 - (void)updateViewConstraints
