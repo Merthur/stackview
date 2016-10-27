@@ -46,7 +46,7 @@ static const CGFloat labelWidth = 5;
      */
     self.containerView.axis = UILayoutConstraintAxisHorizontal;
 
-    self.containerView.spacing = 0;
+    self.containerView.spacing = 10;
 
     /**  UIStackViewDistribution
      UIStackViewDistributionFill,
@@ -55,7 +55,7 @@ static const CGFloat labelWidth = 5;
      UIStackViewDistributionEqualSpacing,
      UIStackViewDistributionEqualCentering,
      */
-    self.containerView.distribution = UIStackViewDistributionFill;
+    self.containerView.distribution = UIStackViewDistributionFillEqually;
     
     /**  UIStackViewAlignment
      UIStackViewAlignmentFill,
@@ -67,7 +67,7 @@ static const CGFloat labelWidth = 5;
      UIStackViewAlignmentBottom = UIStackViewAlignmentTrailing,
      UIStackViewAlignmentLastBaseline,
      */
-    self.containerView.alignment = UIStackViewAlignmentCenter;
+    self.containerView.alignment = UIStackViewAlignmentLastBaseline;
 
     [self.view addSubview:self.containerView];
     
@@ -108,9 +108,14 @@ static const CGFloat labelWidth = 5;
     NSLog(@"Before Add arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
 
     CustomLabel *view = [[CustomLabel alloc] initWithFrame:CGRectZero];
-//    view.numberOfLines = 0;
     view.textAlignment = NSTextAlignmentCenter;
-    view.text = @"test";
+    /*First & Last Base Line*/
+    view.numberOfLines = 0;
+    NSMutableString *str = [@"test" mutableCopy];
+    for (int i=0; i<self.containerView.arrangedSubviews.count * 2; i++) {
+        [str appendString:@"test"];
+    }
+    view.text = str;
 
 //    int count = (int)(3 - self.containerView.subviews.count);
 
@@ -118,19 +123,16 @@ static const CGFloat labelWidth = 5;
 //    [view setContentHuggingPriority:abs(count)
 //                            forAxis:self.containerView.axis];
 
-    //Fill Compression
+    //Fill & EqualSpacing Compression,
 //    view.customIntrinsicContentSize = CGSizeMake(100, 30);
 //    [view setContentCompressionResistancePriority:abs(count)
 //                                          forAxis:self.containerView.axis];
-    NSLog(@"%f %f", [view contentCompressionResistancePriorityForAxis:self.containerView.axis],
-          [view contentHuggingPriorityForAxis:self.containerView.axis]);
 
+    //FillPropotionally, EqualCentering
 //    CGRect frame = view.frame;
 //    frame.size = CGSizeMake((self.containerView.subviews.count+1) * 5, 30);
 //    view.frame = frame;
-
-    //FillPropotionally
-//    view.customIntrinsicContentSize = CGSizeMake((self.containerView.subviews.count+1) * 5, 50);
+//    view.customIntrinsicContentSize = CGSizeMake((self.containerView.subviews.count+1) * 5, 30);
     view.backgroundColor = [UIColor colorWithRed:random()%256/255.0 green:random()%256/255.0 blue:random()%256/255.0 alpha:1];
 
     [self.containerView addArrangedSubview:view];
@@ -156,10 +158,17 @@ static const CGFloat labelWidth = 5;
     NSLog(@"After Remove arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
 }
 
-- (void)printViews
+- (void)printViewsSize
 {
     for (UILabel *label in self.containerView.arrangedSubviews) {
         NSLog(@"%@", NSStringFromCGSize(label.frame.size));
+    }
+}
+
+- (void)printViewCenter
+{
+    for (UILabel *label in self.containerView.arrangedSubviews) {
+        NSLog(@"%@", NSStringFromCGPoint(label.center));
     }
 }
 
@@ -202,6 +211,7 @@ static const CGFloat labelWidth = 5;
 
     [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lblBottom.mas_bottom);
+        //Alignment Fill
         make.bottom.equalTo(self.view.mas_bottom);
         make.leading.equalTo(self.view.mas_leading).offset(10);
         make.width.equalTo(self.removeBtn.mas_width);
@@ -210,6 +220,7 @@ static const CGFloat labelWidth = 5;
 
     [self.removeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.lblBottom.mas_bottom);
+        //Alignment Fill
         make.bottom.equalTo(self.view.mas_bottom);
         make.leading.equalTo(self.addBtn.mas_trailing).offset(10);
         make.trailing.equalTo(self.view.mas_trailing).offset(-10);
