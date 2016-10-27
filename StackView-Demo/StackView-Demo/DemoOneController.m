@@ -113,9 +113,12 @@ static const CGFloat labelWidth = 5;
     view.text = @"test";
 
 //    int count = (int)(3 - self.containerView.subviews.count);
+
+    //Fill Stretch
 //    [view setContentHuggingPriority:abs(count)
 //                            forAxis:self.containerView.axis];
 
+    //Fill Compression
 //    view.customIntrinsicContentSize = CGSizeMake(100, 30);
 //    [view setContentCompressionResistancePriority:abs(count)
 //                                          forAxis:self.containerView.axis];
@@ -125,6 +128,9 @@ static const CGFloat labelWidth = 5;
 //    CGRect frame = view.frame;
 //    frame.size = CGSizeMake((self.containerView.subviews.count+1) * 5, 30);
 //    view.frame = frame;
+
+    //FillPropotionally
+//    view.customIntrinsicContentSize = CGSizeMake((self.containerView.subviews.count+1) * 5, 50);
     view.backgroundColor = [UIColor colorWithRed:random()%256/255.0 green:random()%256/255.0 blue:random()%256/255.0 alpha:1];
 
     [self.containerView addArrangedSubview:view];
@@ -142,20 +148,25 @@ static const CGFloat labelWidth = 5;
     NSLog(@"Before Remove arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
     
     UIView *view = self.containerView.arrangedSubviews.lastObject;
-    [self.containerView removeArrangedSubview:view];
-//    [view removeFromSuperview];
+//    [self.containerView removeArrangedSubview:view];
+    [view removeFromSuperview];
     [UIView animateWithDuration:0.25 animations:^{
         [self.containerView layoutIfNeeded];
     }];
     NSLog(@"After Remove arrangedSubviews: %zd Subviews: %zd", self.containerView.arrangedSubviews.count, self.containerView.subviews.count);
 }
 
+- (void)printViews
+{
+    for (UILabel *label in self.containerView.arrangedSubviews) {
+        NSLog(@"%@", NSStringFromCGSize(label.frame.size));
+    }
+}
+
 - (void)updateViewConstraints
 {
     [self.containerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_top).offset(70+labelWidth);
-//        make.leading.equalTo(self.view.mas_leading).offset(labelWidth);
-//        make.trailing.equalTo(self.view.mas_trailing).offset(-labelWidth);
     }];
     
     [self.lblRight mas_makeConstraints:^(MASConstraintMaker *make) {
