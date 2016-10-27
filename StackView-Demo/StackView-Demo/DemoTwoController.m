@@ -115,7 +115,7 @@ static const CGFloat labelWidth = 5;
     UIView *view = [self.horizontalView subviews].lastObject;
     if (!view) return;
     
-    [self.horizontalView removeArrangedSubview:view];
+//    [self.horizontalView removeArrangedSubview:view];
     [view removeFromSuperview];
     view = nil;
     [UIView animateWithDuration:0.25 animations:^{
@@ -140,7 +140,7 @@ static const CGFloat labelWidth = 5;
     if (!view) return;
     if ([view isKindOfClass:[UIStackView class]]) return;
     
-    [self.verticalView removeArrangedSubview:view];
+//    [self.verticalView removeArrangedSubview:view];
     [view removeFromSuperview];
     [UIView animateWithDuration:0.25 animations:^{
         [self.verticalView layoutIfNeeded];
